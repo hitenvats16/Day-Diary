@@ -8,7 +8,7 @@ const diary_status = (items) => {
   if (items===null) {
     return <Text style={styles.no_Diaries}>No Diaries Yet</Text>;
   }
-  const renderItem = ({ item }) => <Cards title={item.Title} date={"30 Nov 2021"}/>;
+  const renderItem = ({ item }) => <Cards title={item.Title} date={item.Date}/>;
   return (
     <FlatList data={items} renderItem={renderItem} keyExtractor={item => item.key} style={{ width: "100%", paddingHorizontal: 20 }}/>
   );

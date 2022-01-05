@@ -10,6 +10,13 @@ import { useState } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Random from 'expo-random';
 
+function get_Dates(){
+  let date = new Date().getDate();
+  let month = new Date().getMonth();
+  let year = new Date().getFullYear();
+  return `${date}-${month+1}-${year}`;
+}
+
 export default function AddScreen( { navigation } ) {
   const [title, setTitle] = useState(null);
   const [body, setBody] = useState(null);
@@ -20,13 +27,13 @@ export default function AddScreen( { navigation } ) {
     }
     let fetch_result = await AsyncStorage.getItem('Diary');
     if(fetch_result==null){
-      let day = [{ Title:title, Body: body, key: Random.getRandomBytes(1)[0]}];
+      let day = [{ Title:title, Body: body, Date: get_Dates(), key: Random.getRandomBytes(1)[0]}];
       day = JSON.stringify(day);
       await AsyncStorage.setItem('Diary',day);
       console.log(day);
     } else {
       let res = JSON.parse(fetch_result);
-      res.push({ Title:title, Body: body, key: Random.getRandomBytes(1)[0]});
+      res.push({ Title:title, Body: body, Date: get_Dates(), key: Random.getRandomBytes(1)[0]});
       res = JSON.stringify(res);
       await AsyncStorage.setItem('Diary',res);
       console.log(res);
