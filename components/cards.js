@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: "black",
     flexDirection: "row",
-    marginVertical: 10
+    marginVertical: 7
   },
   text: {
     flex: 0.9,
