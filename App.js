@@ -1,20 +1,41 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-
+import { StyleSheet, Text, View, StatusBar, ScrollView } from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer } from "@react-navigation/native";
+import HomeScreen from "./screens/HomeScreen";
+import AddScreen from "./screens/AddScreen";
+const Stack = createStackNavigator();
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home" screenOptions={{presentation: 'modal'}}>
+          <Stack.Screen
+            name="Home"
+            options={{ headerShown: false }}
+            component={HomeScreen}
+          />
+          <Stack.Screen
+            name="Add"
+            component={AddScreen}
+            options={{ headerTitleAlign: 'center', title: 'Add a New Day' }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: StatusBar.currentHeight,
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#fff",
+    position: "relative",
+  },
+  view: {
+    width: 300,
+    height: 300,
+    backgroundColor: "black",
+    margin: 5,
   },
 });
