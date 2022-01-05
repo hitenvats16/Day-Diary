@@ -3,18 +3,38 @@ import {
   Text,
   StyleSheet,
   TextInput,
-  Button,
   TouchableOpacity,
-  KeyboardAvoidingView,
+  ToastAndroid
 } from "react-native";
 import { useState } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as Random from 'expo-random';
 
-export default function AddScreen() {
+export default function AddScreen( { navigation } ) {
   const [title, setTitle] = useState(null);
-  const [Body, setBody] = useState(null);
+  const [body, setBody] = useState(null);
+  const append_data = async ()=>{
+    if(title===null && body===null){
+      ToastAndroid.showWithGravity("Blank Feilds are not tollerable", ToastAndroid.SHORT, ToastAndroid.BOTTOM);
+      return;
+    }
+    let fetch_result = await AsyncStorage.getItem('Diary');
+    if(fetch_result==null){
+      let day = [{ Title:title, Body: body, key: Random.getRandomBytes(1)[0]}];
+      day = JSON.stringify(day);
+      await AsyncStorage.setItem('Diary',day);
+      console.log(day);
+    } else {
+      let res = JSON.parse(fetch_result);
+      res.push({ Title:title, Body: body, key: Random.getRandomBytes(1)[0]});
+      res = JSON.stringify(res);
+      await AsyncStorage.setItem('Diary',res);
+      console.log(res);
+    }
+  }
   return (
     <>
-      <View style={styles.contaner}>
+      <View style={styles.container}>
         <Text style={styles.headings}>Title</Text>
         <TextInput
           placeholder="..."
@@ -44,11 +64,11 @@ export default function AddScreen() {
       </View>
       <TouchableOpacity
         style={styles.btn}
-        onPress={() => {
-          console.log("Title: ", title);
-          console.log("Body: ", Body);
+        onPress={async () => {
+          await append_data();
           setBody(null);
           setTitle(null);
+          navigation.goBack();
         }}
       >
         <Text style={styles.submit_text}>Submit</Text>
@@ -57,7 +77,7 @@ export default function AddScreen() {
   );
 }
 const styles = StyleSheet.create({
-  contaner: {
+  container: {
     flex: 1 - 0.075,
     paddingHorizontal: 20,
     paddingVertical: 10,

@@ -1,29 +1,35 @@
-import { Text, View, StyleSheet, ScrollView } from "react-native";
+import { Text, View, StyleSheet, FlatList } from "react-native";
 import Button from "../components/button";
 import Cards from "../components/cards";
+import {useEffect, useState} from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const diary_status = (no_of_entries) => {
-  if (no_of_entries == 0) {
+const diary_status = (items) => {
+  if (items===null) {
     return <Text style={styles.no_Diaries}>No Diaries Yet</Text>;
   }
+  const renderItem = ({ item }) => <Cards title={item.Title} date={"30 Nov 2021"}/>;
   return (
-    <ScrollView
-      contentContainerStyle={{ alignItems: "center" }}
-      style={{ width: "100%", paddingHorizontal: 20 }}
-    >
-      <Cards title={"A wonderful day"} date={"20 Nov 2020"} />
-      <Cards title={"A wonderful day"} date={"20 Nov 2020"} />
-    </ScrollView>
+    <FlatList data={items} renderItem={renderItem} keyExtractor={item => item.key} style={{ width: "100%", paddingHorizontal: 20 }}/>
   );
 };
 
 export default function HomeScreen({ navigation }) {
+  const [items, setItems] = useState([]);
+  const get_items = async ()=>{
+    let items = await AsyncStorage.getItem('Diary')
+    items = JSON.parse(items);
+    setItems(items);
+  }
+  useEffect(async () => {
+    await get_items();
+  },[]);
   return (
     <View style={styles.outer_container}>
       <View style={styles.heading}>
         <Text style={styles.heading_text}>Day Diary</Text>
       </View>
-      <View style={styles.container}>{diary_status(2)}</View>
+      <View style={styles.container}>{diary_status(items)}</View>
       <Button
         onPress={() => {
           navigation.navigate("Add");
