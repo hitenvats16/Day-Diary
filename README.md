@@ -1,5 +1,5 @@
 # DayDiary - Documenting days
-### An application made with react-native and expo. This Aookicatuib helps in documenting your day anywhere anytime just via your phone. 
+### An application made with react-native and expo. This Application helps in documenting your day anywhere anytime just via your phone. 
 
 ## How to setup project in your machine
 
