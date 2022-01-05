@@ -24,6 +24,9 @@ export default function HomeScreen({ navigation }) {
   useEffect(async () => {
     await get_items();
   },[]);
+  useEffect(async () => {
+    await get_items();
+  },[items]);
   return (
     <View style={styles.outer_container}>
       <View style={styles.heading}>
