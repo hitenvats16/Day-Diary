@@ -30,37 +30,37 @@ const diary_status = (items) => {
 
 export default function HomeScreen({ navigation }) {
   const [items, setItems] = useState([]);
-  
+
   const DeleteDiaries = () => {
     Alert.alert(
       "Permanently Delete Diaries?",
       "All the diaries will be deleted permanently from App. Do you still want to go ahead?",
       [
         {
-          title: "Yes"
+          title: "Yes",
         },
         {
-          title: "No"
-        }
+          title: "No",
+        },
       ]
     );
   };
 
   const Delete_it = () => {
-    AsyncStorage.removeItem("Diary");
-    setItems(null);
+    setItems([]);
+    AsyncStorage.removeItem('Diary');
   };
 
   const get_items = async () => {
     let items = await AsyncStorage.getItem("Diary");
-    items = JSON.parse(items);
+    items = items === null ? [] : JSON.parse(items);
     setItems(items);
   };
 
   useEffect(async () => {
     await get_items();
   }, []);
-  
+
   useEffect(async () => {
     await get_items();
   }, [items]);
