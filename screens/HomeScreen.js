@@ -11,44 +11,42 @@ import Cards from "../components/cards";
 import { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const diary_status = (items) => {
-  if (items === null) {
-    return <Text style={styles.no_Diaries}>No Diaries Yet</Text>;
-  }
-  const renderItem = ({ item }) => (
-    <Cards title={item.Title} date={item.Date} />
-  );
-  return (
-    <FlatList
-      data={items}
-      renderItem={renderItem}
-      keyExtractor={(item) => item.key}
-      style={{ width: "100%", paddingHorizontal: 20 }}
-    />
-  );
-};
-
 export default function HomeScreen({ navigation }) {
   const [items, setItems] = useState([]);
 
-  const DeleteDiaries = () => {
-    Alert.alert(
-      "Permanently Delete Diaries?",
-      "All the diaries will be deleted permanently from App. Do you still want to go ahead?",
-      [
-        {
-          title: "Yes",
-        },
-        {
-          title: "No",
-        },
-      ]
+  const diary_status = (items) => {
+    if (items.length === 0) {
+      return (
+        <>
+          <Text style={styles.no_Diaries}>No Diaries Yet</Text>
+          <Text style={styles.no_Diaries}>
+            Add a diary by clicking "Add a new day"
+          </Text>
+        </>
+      );
+    }
+    const renderItem = ({ item }) => (
+      <Cards
+        title={item.Title}
+        date={item.Date}
+        onpress={() => {
+          navigation.navigate("Diary", { item });
+        }}
+      />
+    );
+    return (
+      <FlatList
+        data={items}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.key}
+        style={{ width: "100%", paddingHorizontal: 20 }}
+      />
     );
   };
 
   const Delete_it = () => {
     setItems([]);
-    AsyncStorage.removeItem('Diary');
+    AsyncStorage.removeItem("Diary");
   };
 
   const get_items = async () => {

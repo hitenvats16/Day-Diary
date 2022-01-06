@@ -1,10 +1,10 @@
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-export default function Card({ title, date }) {
+export default function Card({ title, date, onpress }) {
   return (
     <TouchableOpacity
       onPress={() => {
-        console.log("pressed");
+        onpress();
       }}
     >
       <View style={styles.card}>

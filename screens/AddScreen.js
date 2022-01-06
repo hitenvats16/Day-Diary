@@ -32,7 +32,7 @@ export default function AddScreen( { navigation } ) {
       await AsyncStorage.setItem('Diary',day);
     } else {
       let res = JSON.parse(fetch_result);
-      res.push({ Title:title, Body: body, Date: get_Dates(), key: Random.getRandomBytes(1)[0]});
+      res.unshift({ Title:title, Body: body, Date: get_Dates(), key: Random.getRandomBytes(1)[0]});
       res = JSON.stringify(res);
       await AsyncStorage.setItem('Diary',res);
     }
