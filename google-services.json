@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "811912433792",
+    "project_id": "daydiary-54f22",
+    "storage_bucket": "daydiary-54f22.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:811912433792:android:a3742b42fff795c4b61665",
+        "android_client_info": {
+          "package_name": "com.hitenvats16.DayDiary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "811912433792-eispt1dq7n05hpfe28e4tm9lghjmaq5p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hitenvats16.DayDiary",
+            "certificate_hash": "ea9fdade51f11388ba959dd569d5640fcc3a2f8d"
+          }
+        },
+        {
+          "client_id": "811912433792-f9ciajtg9c724tqt7o5jinkngbtk5082.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJI_TOdu7GC4oeXB5W3Bv7EhvcB7g8abM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "811912433792-f9ciajtg9c724tqt7o5jinkngbtk5082.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

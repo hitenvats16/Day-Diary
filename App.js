@@ -4,35 +4,31 @@ import { NavigationContainer } from "@react-navigation/native";
 import HomeScreen from "./screens/HomeScreen";
 import AddScreen from "./screens/AddScreen";
 import Diary from "./screens/diary";
-import loginScreen from "./screens/loginScreen";
+import Sign from "./screens/login";
 
 const Stack = createStackNavigator();
 export default function App() {
   return (
-    <View style={styles.container}>
-      <NavigationContainer>
-        <Stack.Navigator
-          screenOptions={{ presentation: "modal" }}
-          initialRouteName="LogIn"
-        >
-          <Stack.Screen
-            name="Day_Diary"
-            component={Stacks}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Add"
-            component={AddScreen}
-            options={{ headerTitleAlign: "center", title: "Add a New Day" }}
-          />
-          <Stack.Screen
-            name="LogIn"
-            component={loginScreen}
-            options={{ headerShown: false }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </View>
+    // <View style={styles.container}>
+    //   <NavigationContainer>
+    //     <Stack.Navigator
+    //       screenOptions={{ presentation: "modal" }}
+    //       initialRouteName="Login"
+    //     >
+    //       <Stack.Screen
+    //         name="Day_Diary"
+    //         component={Stacks}
+    //         options={{ headerShown: false }}
+    //       />
+    //       <Stack.Screen
+    //         name="Add"
+    //         component={AddScreen}
+    //         options={{ headerTitleAlign: "center", title: "Add a New Day" }}
+    //       />
+    //     </Stack.Navigator>
+    //   </NavigationContainer>
+    // </View>
+    <Sign/>
   );
 }
 
